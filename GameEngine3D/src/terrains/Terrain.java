@@ -17,10 +17,9 @@ import toolbox.Maths;
 
 public class Terrain {
 
-	private static final float SIZE = 800;
 	private static final float MAX_HEIGHT = 40;
 	private static final float MAX_PIXEL_COLOR = 256 * 256 * 256;
-	
+	private static int size;
 	private float x;
 	private float z;
 	private RawModel model;
@@ -30,21 +29,22 @@ public class Terrain {
 	private float[][] heights;
 	
 	
-	public Terrain(int gridX, int gridZ, Loader loader, 
+	public Terrain(int size, int gridX, int gridZ, Loader loader, 
 			TerrainTexturePack texturePack, 
 			TerrainTexture blendMap,
 			String heightMap) {
 		
+		this.size = size;
 		this.texturePack = texturePack;
 		this.blendMap = blendMap;
-		this.x = gridX * SIZE;
-		this.z = gridZ * SIZE;
+		this.x = gridX * size;
+		this.z = gridZ * size;
 		this.model = generateTerrain(loader,heightMap);
 		
 	}
 		
 	public static float getSize() {
-		return SIZE;
+		return size;
 	}
 
 //	public static int getVertexCount() {
@@ -63,7 +63,7 @@ public class Terrain {
 	public float getHeightOfTerrain(float worldX, float worldZ) {
 		float terrainX = worldX - this.x;
 		float terrainZ = worldZ - this.z;
-		float gridSquareSize = SIZE / ((float) heights.length - 1);
+		float gridSquareSize = size / ((float) heights.length - 1);
 		int gridX = (int) Math.floor(terrainX / gridSquareSize);
 		int gridZ = (int) Math.floor(terrainZ / gridSquareSize);
 		if (gridX >= heights.length -1 ||
@@ -127,12 +127,12 @@ public class Terrain {
 		for(int i=0;i<VERTEX_COUNT;i++){
 			for(int j=0;j<VERTEX_COUNT;j++){
 				vertices[vertexPointer*3] = (float) j / 
-						((float) VERTEX_COUNT - 1) * SIZE;
+						((float) VERTEX_COUNT - 1) * size;
 				float height = getHeight(j, i, image);
 				heights[j][i] = height;
 				vertices[vertexPointer*3+1] = height;
 				vertices[vertexPointer*3+2] = (float) i / 
-						((float) VERTEX_COUNT - 1) * SIZE;
+						((float) VERTEX_COUNT - 1) * size;
 				Vector3f normal = calculateNormal(j, i, image);
 				normals[vertexPointer*3] = normal.x;
 				normals[vertexPointer*3+1] = normal.y;
