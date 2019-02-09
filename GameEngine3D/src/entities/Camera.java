@@ -7,11 +7,11 @@ import org.lwjgl.util.vector.Vector3f;
 public class Camera {
 	
 	private static float MIN_DISTANCE_FROM_PLAYER = 20.0f;
-	private static float MAX_DISTANCE_FROM_PLAYER = 200.0f;
+	private static float MAX_DISTANCE_FROM_PLAYER = 50.0f;
 	private float distanceFromPlayer = 50;
 	private float angleAroundPlayer = 0;
 	private Player player;
-
+	private static boolean firstPerson = false;
 
 	private Vector3f position = new Vector3f(0,0,0);
 	
@@ -36,8 +36,18 @@ public class Camera {
 		calculateZoom();
 		calculatePitch();
 		calculateAngleAroundPlayer();
-		float horizontalDistance = calculateHorizontalDistance();
-		float verticleDistance = calculateVerticleDistance();
+		
+		float horizontalDistance = 0;
+		float verticleDistance = 10;
+		
+		if (firstPerson) {
+			horizontalDistance = 0;
+			verticleDistance = 0;
+		} else {
+			horizontalDistance = calculateHorizontalDistance();
+			verticleDistance = calculateVerticleDistance();
+		}
+		
 		calculateCameraPosition(horizontalDistance,verticleDistance);
 		this.yaw = 180 - (player.getRotY() + angleAroundPlayer);
 	}
@@ -103,6 +113,27 @@ public class Camera {
 		}
 		
 	}
+
+	public boolean isFirstPerson() {
+		return firstPerson;
+	}
+
+	public static void cycleFirstPerson() {
+		firstPerson = !firstPerson;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
