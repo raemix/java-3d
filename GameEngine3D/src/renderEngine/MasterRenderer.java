@@ -12,6 +12,8 @@ import org.lwjgl.util.vector.Matrix4f;
 import entities.Camera;
 import entities.Entity;
 import entities.Light;
+import guis.GuiRenderer;
+import guis.GuiShader;
 import models.TexturedModel;
 import shaders.StaticShader;
 import shaders.TerrainShader;
@@ -38,6 +40,9 @@ public class MasterRenderer {
 	private TerrainRenderer terrainRenderer;
 	private TerrainShader terrainShader = new TerrainShader();
 	
+//	private GuiRenderer guiRenderer;
+//	private GuiShader guiShader = new GuiShader();
+
 	
 	private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
 	private List<Terrain> terrains = new ArrayList<Terrain>();
@@ -47,6 +52,7 @@ public class MasterRenderer {
 		createProjectionMatrix();
 		renderer  = new EntityRenderer(shader, projectionMatrix);
 		terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
+		//guiRenderer = new GuiRenderer(loader);
 	}
 	
 	public static void enableCulling() {

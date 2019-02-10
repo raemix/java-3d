@@ -1,6 +1,7 @@
 package entities;
 
 import org.lwjgl.util.vector.Vector3f;
+@SuppressWarnings("unused")
 
 public class Light {
 

@@ -9,6 +9,7 @@ import models.TexturedModel;
 import objConverter.ModelData;
 import renderEngine.*;
 import textures.ModelTexture;
+@SuppressWarnings("unused")
 
 public class Box extends Entity {
 	
