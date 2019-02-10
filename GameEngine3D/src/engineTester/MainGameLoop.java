@@ -90,10 +90,9 @@ public class MainGameLoop {
         
         
         
-        TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader),
-        		new ModelTexture(loader.loadTexture("fern")));
-        fern.getTexture().setHasTransparency(true);
-
+        ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
+        fernTextureAtlas.setNumberOfRows(2);
+        TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), fernTextureAtlas);
         
         List<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
@@ -142,7 +141,7 @@ public class MainGameLoop {
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(nextID, false, fern, new Vector3f(x,
+            entities.add(new Entity(nextID, false, fern, random.nextInt(4), new Vector3f(x,
             		y,z),0,i,0,1));
             nextID++;
 

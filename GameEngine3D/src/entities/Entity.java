@@ -19,10 +19,24 @@ public class Entity {
 	private boolean isPlayer;
 	public boolean shouldRender = true;
 	
+	private int textureIndex = 0;
+	
 	public Entity(int ID, boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		this.ID = ID;
 		this.isPlayer = isPlayer;
 		this.model = model;
+		this.position = position;
+		this.rotX = rotX;
+		this.rotY = rotY;
+		this.rotZ = rotZ;
+		this.scale = scale;
+	}
+	
+	public Entity(int ID, boolean isPlayer, TexturedModel model, int textureIndex, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+		this.ID = ID;
+		this.isPlayer = isPlayer;
+		this.model = model;
+		this.textureIndex = textureIndex;
 		this.position = position;
 		this.rotX = rotX;
 		this.rotY = rotY;
@@ -136,6 +150,17 @@ public class Entity {
 		
 	}
 	
+	public float getTextureXOffset() {
+		
+		int column = textureIndex % model.getTexture().getNumberOfRows();
+		return (float) column / (float) model.getTexture().getNumberOfRows();
+	}
+	
+	public float getTextureYOffset() {
+		
+		int row = textureIndex / model.getTexture().getNumberOfRows();
+		return (float) row / (float) model.getTexture().getNumberOfRows();
+	}
 	
 	
 }

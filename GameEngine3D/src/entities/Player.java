@@ -18,8 +18,10 @@ public class Player extends Entity{
 	private float upwardSpeed = 0;
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
-	private double currentStrafeSpeed = 0;
-	private double strafeSpeed = RUN_SPEED * 0.75;
+
+	private float strafeSpeed = RUN_SPEED * 0.75f;
+	private float currentStrafeSpeed = 0;
+	private boolean ableToCycleFirstPerson = true;
 	
 	public Player(int ID, boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super(ID, isPlayer, model, position, rotX, rotY, rotZ, scale);
@@ -89,6 +91,15 @@ public class Player extends Entity{
 			jump();
 		}
 		
+		if (Keyboard.isKeyDown(Keyboard.KEY_F5) && ableToCycleFirstPerson) {
+			ableToCycleFirstPerson = false;
+			Camera.cycleFirstPerson();
+			
+		}
+		if (!Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+			ableToCycleFirstPerson = true;;
+
+		}
 	}
 	
 	@Override
