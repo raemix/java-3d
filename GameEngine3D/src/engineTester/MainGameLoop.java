@@ -39,7 +39,7 @@ public class MainGameLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
         int nextID = 0;
-        int mapSize = 1600;
+        int mapSize = 1200;
         
         //**************** TERRAIN TEXTURE STUFF **********************
         

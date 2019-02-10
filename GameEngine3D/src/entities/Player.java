@@ -9,8 +9,8 @@ import terrains.Terrain;
 
 public class Player extends Entity{
 
-	private static final float RUN_SPEED = 40;
-	private static final float TURN_SPEED = 100;
+	private static final float RUN_SPEED = 30;
+	private static final float TURN_SPEED = 85;
 	private static final float GRAVITY = -50;
 	private static final float JUMP_POWER = 30;
 	
@@ -18,7 +18,8 @@ public class Player extends Entity{
 	private float upwardSpeed = 0;
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
-	private float currentStrafeSpeed = 0;
+	private double currentStrafeSpeed = 0;
+	private double strafeSpeed = RUN_SPEED * 0.75;
 	
 	public Player(int ID, boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super(ID, isPlayer, model, position, rotX, rotY, rotZ, scale);
@@ -34,7 +35,7 @@ public class Player extends Entity{
 		super.increaseRotation(0, 
 				currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
 		float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
-		float strafeDistance = currentStrafeSpeed * DisplayManager.getFrameTimeSeconds();
+		float strafeDistance = (float) (currentStrafeSpeed * DisplayManager.getFrameTimeSeconds());
 
 		float dx = (float) (distance * Math.sin(Math.toRadians(super.getRotY())));
 		float dz = (float) (distance * Math.cos(Math.toRadians(super.getRotY())));
@@ -68,9 +69,9 @@ public class Player extends Entity{
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-			this.currentStrafeSpeed = RUN_SPEED;
+			this.currentStrafeSpeed = strafeSpeed;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_E)){
-			this.currentStrafeSpeed = -RUN_SPEED;
+			this.currentStrafeSpeed = -strafeSpeed;
 		} else {
 			this.currentStrafeSpeed = 0;
 		}
