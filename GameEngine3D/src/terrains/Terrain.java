@@ -34,7 +34,7 @@ public class Terrain {
 			TerrainTexture blendMap,
 			String heightMap) {
 		
-		this.size = size;
+		Terrain.size = size;
 		this.texturePack = texturePack;
 		this.blendMap = blendMap;
 		this.x = gridX * size;
