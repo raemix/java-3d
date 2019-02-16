@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+@SuppressWarnings("unused")
 
 public class Player extends Entity{
 

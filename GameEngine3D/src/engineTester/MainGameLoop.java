@@ -11,6 +11,7 @@ import objConverter.ModelData;
 import objConverter.OBJFileLoader;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
  
 import renderEngine.DisplayManager;
@@ -28,6 +29,8 @@ import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import entities.Player;
+import guis.GuiRenderer;
+import guis.GuiTexture;
  
 public class MainGameLoop {
 	
@@ -66,13 +69,9 @@ public class MainGameLoop {
         nextID++;
         
         
-        
-        
-        
         TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader),
         		new ModelTexture(loader.loadTexture("lowPolyTree")));
          
-        
         
         TexturedModel tree = new TexturedModel(OBJLoader.loadObjModel("tree", loader),
         		new ModelTexture(loader.loadTexture("tree")));
@@ -154,7 +153,27 @@ public class MainGameLoop {
         MasterRenderer renderer = new MasterRenderer();
         
         Camera camera = new Camera(player);   
-
+        List<GuiTexture> guis = new ArrayList<GuiTexture>();
+        
+        GuiTexture gui = new GuiTexture(loader.loadTexture("socuwan"), 
+        		new Vector2f(0.5f, -0.65f), new Vector2f(0.35f, 0.25f));
+        guis.add(gui);
+        
+        GuiTexture tmGui = new GuiTexture(loader.loadTexture("thinmatrix"),
+        		new Vector2f(0.5f, -0.85f), new Vector2f(0.5f, 0.5f));
+        guis.add(tmGui);
+        
+        GuiRenderer guiRenderer = new GuiRenderer(loader);
+        
+        
+        
+        
+		/*
+		 * ******************************************************************** 
+		 * Game
+		 * Logic
+		 ********************************************************************
+		 */        
         
         while(!Display.isCloseRequested()){
             player.move(terrain);
@@ -173,9 +192,11 @@ public class MainGameLoop {
             	}
             }
             renderer.render(light, camera);
+            guiRenderer.render(guis);
             DisplayManager.updateDisplay();
         }
  
+        guiRenderer.cleanUp();
         renderer.cleanUp();
         loader.cleanUp();
         DisplayManager.closeDisplay();

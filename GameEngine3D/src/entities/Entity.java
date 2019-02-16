@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import models.TexturedModel;
 import objConverter.ModelData;
+@SuppressWarnings("unused")
 
 public class Entity {
 
