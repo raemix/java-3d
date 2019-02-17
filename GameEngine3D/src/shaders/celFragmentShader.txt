@@ -24,10 +24,8 @@ void main(void){
 	vec3 unitLightVector = normalize(toLightVector);
 	
 	float nDot1 = dot(unitNormal,unitLightVector);
-	float minAmbientLight = 0.1;
-	float maxBrightness = 1.0;
-	float brightness = max(nDot1,minAmbientLight);
-	brightness = max(nDot1 * maxBrightness,minAmbientLight);
+	float brightness = max(nDot1,0.2);
+	brightness = max(nDot1 * maxBrightness,0.3);
 	
 	vec3 diffuse = brightness * lightColor;
 	float level = floor(brightness * levels);
