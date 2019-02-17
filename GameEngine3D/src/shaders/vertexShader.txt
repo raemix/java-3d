@@ -20,8 +20,8 @@ uniform float numberOfRows;
 uniform vec2 offset;
 
 
-const float density = 0.0035;
-const float gradient = 10.0;
+const float density = 0.003;
+const float gradient = 80.0;
 
 void restricted_inverse(mat4 src, out mat4 dst)
 {
