@@ -169,7 +169,7 @@ public class MainGameLoop {
         }
 
 
-        MasterRenderer renderer = new MasterRenderer();
+        MasterRenderer renderer = new MasterRenderer(loader);
         
         Camera camera = new Camera(player);   
         List<GuiTexture> guis = new ArrayList<GuiTexture>();

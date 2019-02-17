@@ -23,7 +23,7 @@ public class DisplayManager {
 		
 		ContextAttribs attribs = new ContextAttribs(3,2)
 		.withForwardCompatible(true)
-		.withProfileCore(true);;
+		.withProfileCompatibility(true);
 		
 		
 		try {

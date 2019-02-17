@@ -12,7 +12,7 @@ public class Camera {
 	private float distanceFromPlayer = 50;
 	private float angleAroundPlayer = 0;
 	private Player player;
-	private static boolean firstPerson = false;
+	private static boolean firstPerson = true;
 
 	private Vector3f position = new Vector3f(0,0,0);
 	
