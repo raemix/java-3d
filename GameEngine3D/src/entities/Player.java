@@ -24,8 +24,8 @@ public class Player extends Entity{
 	private float currentStrafeSpeed = 0;
 	private boolean ableToCycleFirstPerson = true;
 	
-	public Player(int ID, boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-		super(ID, isPlayer, model, position, rotX, rotY, rotZ, scale);
+	public Player(boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+		super(isPlayer, model, position, rotX, rotY, rotZ, scale);
 		// TODO Auto-generated constructor stub
 	}
 	

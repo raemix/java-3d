@@ -20,7 +20,7 @@ public class Box extends Entity {
 	private float dHoverY  = 0.01f;
 	private static TexturedModel box = new TexturedModel(OBJLoader.loadObjModel("box", loader),new ModelTexture(loader.loadTexture("box")));
 	
-	public Box(int nextID, boolean b, Vector3f position, float scale) {
+	public Box(boolean b, Vector3f position, float scale) {
 		super(position, scale);
 		
 		this.model = box;

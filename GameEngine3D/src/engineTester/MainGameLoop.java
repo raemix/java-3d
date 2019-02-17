@@ -27,7 +27,9 @@ import textures.TerrainTexturePack;
 import entities.Box;
 import entities.Camera;
 import entities.Entity;
+import entities.LampPost;
 import entities.Light;
+import entities.LightSource;
 import entities.Player;
 import guis.GuiRenderer;
 import guis.GuiTexture;
@@ -41,7 +43,6 @@ public class MainGameLoop {
  
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        int nextID = 0;
         int mapSize = 1200;
         
         //**************** TERRAIN TEXTURE STUFF **********************
@@ -65,8 +66,7 @@ public class MainGameLoop {
         RawModel playerModel = OBJLoader.loadObjModel("person", loader);
         TexturedModel person = new TexturedModel(playerModel, new ModelTexture(loader.loadTexture("playerTexture")));
         
-        Player player = new Player(nextID, true, person, new Vector3f(500,25,50), 0, 0, 0, 1);
-        nextID++;
+        Player player = new Player(true, person, new Vector3f(200,25,200), 0, 0, 0, 1);
         
         
         TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader),
@@ -102,17 +102,15 @@ public class MainGameLoop {
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(nextID, false, tree, new Vector3f(x, y, z)
+            entities.add(new Entity(false, tree, new Vector3f(x, y, z)
             		,0,i,0,8));
-            nextID++;
         }
         
         for(int i=0;i<200;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Box(nextID, false, new Vector3f(x, y + 10, z), 1));
-            nextID++;
+            entities.add(new Box(false, new Vector3f(x, y + 10, z), 1));
 
         }
         
@@ -120,9 +118,17 @@ public class MainGameLoop {
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(nextID, false, lowPolyTree, new Vector3f(x,
+            entities.add(new Entity(false, lowPolyTree, new Vector3f(x,
             		y,z),0,i,0,1));
-            nextID++;
+            
+        }
+        
+        for(int i=0;i<500;i++){
+        	float x = random.nextFloat() * mapSize;
+        	float z = random.nextFloat() * mapSize;
+        	float y = terrain.getHeightOfTerrain(x, z);
+            entities.add(new Entity(false, grass, new Vector3f(x,
+            		y,z),0,i,0,1));
 
         }
         
@@ -130,29 +136,37 @@ public class MainGameLoop {
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(nextID, false, grass, new Vector3f(x,
+            entities.add(new Entity(false, fern, random.nextInt(4), new Vector3f(x,
             		y,z),0,i,0,1));
-            nextID++;
-
-        }
-        
-        for(int i=0;i<500;i++){
-        	float x = random.nextFloat() * mapSize;
-        	float z = random.nextFloat() * mapSize;
-        	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(nextID, false, fern, random.nextInt(4), new Vector3f(x,
-            		y,z),0,i,0,1));
-            nextID++;
 
         }
         
          
-        Light light = new Light(new Vector3f(0,10000,-7000),
-        		new Vector3f(1,1,1));
+     
+
         List<Light> lights = new ArrayList<Light>();
-        lights.add(light);
-        lights.add(new Light(new Vector3f(-200,10,-200), new Vector3f(10,0,0)));
-        lights.add(new Light(new Vector3f(200,10,200), new Vector3f(0,0,10)));
+        List<LightSource> lightSources = new ArrayList<LightSource>();
+        
+        
+        lights.add(new Light(new Vector3f(0,1000,-7000), new Vector3f(0.1f,0.1f,0.1f)));
+        
+        // add lamps to map
+        for (int i = 0;i<3;i++) {
+        	float x = player.getPosition().x + ((random.nextFloat() * 100) - 50);
+        	float z = player.getPosition().z + ((random.nextFloat() * 100) - 50);
+        	float y = terrain.getHeightOfTerrain(x, z);
+            lightSources.add(new LampPost(false,new Vector3f(x,y,z),0,0,0,1));
+
+        }
+        
+        //bind light source to lamp
+        for (LightSource lightSource : lightSources) {
+        	lightSource.getTexturedModel().getTexture().setUseFakeLighting(true);
+        	lights.add(new Light(new Vector3f(lightSource.getPosition().x,
+        			lightSource.getPosition().y + 13.0f,lightSource.getPosition().z),
+        			new Vector3f(1.0f,0.0f,0.0f),new Vector3f(1.0f,0.01f,0.002f)));
+        	entities.add(lightSource);
+        }
 
 
         MasterRenderer renderer = new MasterRenderer();

@@ -22,8 +22,7 @@ public class Entity {
 	
 	private int textureIndex = 0;
 	
-	public Entity(int ID, boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-		this.ID = ID;
+	public Entity(boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		this.isPlayer = isPlayer;
 		this.model = model;
 		this.position = position;
@@ -33,10 +32,9 @@ public class Entity {
 		this.scale = scale;
 	}
 	
-	public Entity(int ID, boolean isPlayer, TexturedModel model, int textureIndex, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-		this.ID = ID;
+	public Entity(boolean isPlayer, TexturedModel fern, int textureIndex, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		this.isPlayer = isPlayer;
-		this.model = model;
+		this.model = fern;
 		this.textureIndex = textureIndex;
 		this.position = position;
 		this.rotX = rotX;
@@ -142,9 +140,7 @@ public class Entity {
 		
 		
 	}
-	public void popEntity(int ID, List entities) {
-		entities.remove(ID);
-	}
+	
 
 	public void update(List<Entity> entities) {
 		// TODO Auto-generated method stub
