@@ -164,7 +164,7 @@ public class MainGameLoop {
         	lightSource.getTexturedModel().getTexture().setUseFakeLighting(true);
         	lights.add(new Light(new Vector3f(lightSource.getPosition().x,
         			lightSource.getPosition().y + 13.0f,lightSource.getPosition().z),
-        			new Vector3f(1.0f,0.0f,0.0f),new Vector3f(1.0f,0.01f,0.002f)));
+        			new Vector3f(lightSource.getRED(),lightSource.getGREEN(),lightSource.getBLUE()),new Vector3f(1.0f,0.01f,0.002f)));
         	entities.add(lightSource);
         }
 
