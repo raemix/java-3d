@@ -28,9 +28,9 @@ public class MasterRenderer {
 	private static final float RED = 0.5f;
 	private static final float GREEN = 0.5f;
 	private static final float BLUE = 1.0f;
-	private static float skyRed = RED;
-	private static float skyGreen = GREEN;
-	private static float skyBlue = BLUE;
+	private static float skyRed = 0;
+	private static float skyGreen = 0;
+	private static float skyBlue = 0;
 	
 	private Matrix4f projectionMatrix;
 	
@@ -72,18 +72,18 @@ public class MasterRenderer {
 		
 		prepare();
         shader.start();
-        shader.loadSkyColor(skyRed, skyGreen, skyBlue);
+        shader.loadSkyColor(skyRed * RED, skyGreen * GREEN, skyBlue * BLUE);
         shader.loadLights(lights);
         shader.loadViewMatrix(camera);
         renderer.render(entities);
         shader.stop();
         terrainShader.start();
-        terrainShader.loadSkyColor(skyRed, skyGreen, skyBlue);
+        //terrainShader.loadSkyColor(skyRed * RED, skyGreen * GREEN, skyBlue * BLUE);
         terrainShader.loadLights(lights);
         terrainShader.loadViewMatrix(camera);
         terrainRenderer.render(terrains);
         terrainShader.stop();
-        skyboxRenderer.render(camera, skyRed, skyGreen, skyBlue);
+        skyboxRenderer.render(camera, RED, GREEN, BLUE);
         terrains.clear();
         entities.clear();
 	}
@@ -91,6 +91,10 @@ public class MasterRenderer {
 	public void processTerrain(Terrain terrain) {
 		
 		terrains.add(terrain);
+	}
+	
+	public Matrix4f getProjectionMatrix() {
+		return projectionMatrix;
 	}
 	
 	public void processEntity(Entity entity) {

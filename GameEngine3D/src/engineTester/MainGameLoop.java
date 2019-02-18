@@ -24,6 +24,7 @@ import terrains.Terrain;
 import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
+import toolbox.MousePicker;
 import entities.Box;
 import entities.Camera;
 import entities.Entity;
@@ -114,6 +115,8 @@ public class MainGameLoop {
 
         }
         
+        entities.add(new Box(false, new Vector3f(0,10000,0), 100));
+        
         for(int i=0;i<100;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
@@ -174,17 +177,11 @@ public class MainGameLoop {
         Camera camera = new Camera(player);   
         List<GuiTexture> guis = new ArrayList<GuiTexture>();
         
-        GuiTexture gui = new GuiTexture(loader.loadTexture("socuwan"), 
-        		new Vector2f(0.5f, -0.65f), new Vector2f(0.35f, 0.25f));
-        guis.add(gui);
         
-        GuiTexture tmGui = new GuiTexture(loader.loadTexture("thinmatrix"),
-        		new Vector2f(0.5f, -0.85f), new Vector2f(0.5f, 0.5f));
-        guis.add(tmGui);
         
         GuiRenderer guiRenderer = new GuiRenderer(loader);
         
-        
+        MousePicker picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
         
         
 		/*
@@ -197,6 +194,10 @@ public class MainGameLoop {
         while(!Display.isCloseRequested()){
             player.move(terrain);
             camera.move();
+            picker.update();
+            
+            
+            
             for (Entity e : entities) {
             	e.update(entities);
             }

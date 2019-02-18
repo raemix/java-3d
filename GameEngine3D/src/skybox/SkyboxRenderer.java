@@ -71,9 +71,13 @@ public class SkyboxRenderer {
 	private int texture;
 	private int nightTexture;
 	private SkyboxShader shader;
-	private float time = 0.0f;
+	private float timeCounter = 0.0f;
 	private float timeSpeed = 0.01f;
-	private float maxTime = 24;
+	private float maxTime = 12.0f;
+	private float timeOfDay = 0.0f;
+	
+	
+	
 	
 	public SkyboxRenderer(Loader loader, Matrix4f projectionMatrix) {
 		cube = loader.loadToVAO(VERTICES, 3);
@@ -91,7 +95,7 @@ public class SkyboxRenderer {
 	public void render(Camera camera, float r, float g, float b) {
 		shader.start();
 		shader.loadViewMatrix(camera);
-		shader.loadFogColor(r, g, b);
+		//shader.loadFogColor(r, g, b);
 		GL30.glBindVertexArray(cube.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
 		bindTextures(r,g,b);
@@ -134,18 +138,22 @@ public class SkyboxRenderer {
 //	}
 	
 	private void bindTextures(float r, float g, float b) {
-		time+=timeSpeed;
-		if (time >= maxTime) {
-			time = maxTime;
+		timeCounter+=timeSpeed;
+		if (timeCounter >= maxTime) {
+			//timeCounter = maxTime;
 			timeSpeed *= -1;
 		}
-		if (time <= 0) {
-			time = 0;
+		if (timeCounter <= -maxTime) {
+			//timeCounter = 0;
 			timeSpeed*= -1;
 		}
 		int texture2 = texture;
 		int texture1 = nightTexture;
-		float blendFactor = time/maxTime;
+		timeOfDay = timeCounter;
+		if (timeOfDay > 1) timeOfDay = 1;
+		if (timeOfDay < 0) timeOfDay = 0;
+		float blendFactor = timeOfDay;
+
 		System.out.println(blendFactor);
 		r = r * blendFactor;
 		g = g * blendFactor;
@@ -155,6 +163,9 @@ public class SkyboxRenderer {
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, texture2);
 		shader.loadBlendFactor(blendFactor);
+//        terrainShader.start();
+//		terrainShader.loadSkyColor(r, g, b);
+//		terrainShader.stop();
 		shader.loadFogColor(r, g, b);
 		MasterRenderer.setSkyRed(r);
 		MasterRenderer.setSkyGreen(g);
