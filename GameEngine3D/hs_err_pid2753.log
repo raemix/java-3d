@@ -1,0 +1,65 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fa6ce41eaea, pid=2753, tid=2757
+#
+# JRE version: Java(TM) SE Runtime Environment (11.0.1+13) (build 11.0.1+13-LTS)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (11.0.1+13-LTS, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [radeonsi_dri.so+0x4a7aea]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P" (or dumping to /home/mike/git/java-3d/GameEngine3D/core.2753)
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:33809 -Djava.library.path=/home/mike/git/java-3d/GameEngine3D/lib/natives -javaagent:/home/mike/eclipse/configuration/org.eclipse.osgi/216/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 engineTester.MainGameLoop
+
+Host: AMD A8-7410 APU with AMD Radeon R5 Graphics, 4 cores, 6G, Linux Mint 18.3 Sylvia
+Time: Sun Feb 17 20:59:06 2019 CST elapsed time: 64 seconds (0d 0h 1m 4s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fa758013800):  JavaThread "main" [_thread_in_native, id=2757, stack(0x00007fa75e76b000,0x00007fa75e86c000)]
+
+Stack: [0x00007fa75e76b000,0x00007fa75e86c000],  sp=0x00007fa75e86a110,  free space=1020k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [radeonsi_dri.so+0x4a7aea]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 1420  org.lwjgl.opengl.GL11.nglDrawElementsBO(IIIJJ)V (0 bytes) @ 0x00007fa7472d0c0e [0x00007fa7472d0bc0+0x000000000000004e]
+J 1444 c2 org.lwjgl.opengl.GL11.glDrawElements(IIIJ)V (35 bytes) @ 0x00007fa7472d9238 [0x00007fa7472d9100+0x0000000000000138]
+J 1558 c2 renderEngine.EntityRenderer.render(Ljava/util/Map;)V (111 bytes) @ 0x00007fa7473059c4 [0x00007fa747303e00+0x0000000000001bc4]
+J 1644 c1 renderEngine.MasterRenderer.render(Ljava/util/List;Lentities/Camera;)V (142 bytes) @ 0x00007fa7400a7354 [0x00007fa7400a5ca0+0x00000000000016b4]
+J 1522% c2 engineTester.MainGameLoop.main([Ljava/lang/String;)V (1403 bytes) @ 0x00007fa7472eb334 [0x00007fa7472ea6c0+0x0000000000000c74]
+v  ~StubRoutines::call_stub
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000158
+
+Register to memory mapping:
+
+RAX=0x00007fa75886a410 points into unknown readable memory
+RBX=0x00007fa758868bd0 points into unknown readable memory
+RCX=0x00007fa75886a910 points into unknown readable memory
+RDX=0x0000000000000150 is an unknown value
+RSP=0x00007fa75e86a110 is pointing into the stack for thread: 0x00007fa758013800
+RBP=0x0000000000000002 is an unknown value
+RSI=0x00007fa75886a910 points into unknown readable memory
+RDI=0x00007fa758868bd0 points into unknown readable memory
+R8 =0x00000000712f59b0 is an unknown value
+R9 =0x00000000712f59a0 is an unknown value
+R10=0x00000000712f5990 is an unknown value
+R11=0x00007fa75e86a130 is pointing into the stack for thread: 0x00007fa758013800
+R12=0x0 is NULL
+R13=0x0 is NULL
+R14=0x00007fa75e86a1f0 is pointing into the stack for thread: 0x00007fa758013800
+R15=0x0 is NULL
+
+
+Registers:
+RAX=0x00007fa75886a410, RBX=0x00007fa758868bd0

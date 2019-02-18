@@ -1,0 +1,31 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fe4bdceeaea, pid=4584, tid=4588
+#
+# JRE version: Java(TM) SE Runtime Environment (11.0.1+13) (build 11.0.1+13-LTS)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (11.0.1+13-LTS, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [radeonsi_dri.so+0x4a7aea]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P" (or dumping to /home/mike/git/java-3d/GameEngine3D/core.4584)
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:43783 -Djava.library.path=/home/mike/git/java-3d/GameEngine3D/lib/natives -javaagent:/home/mike/eclipse/configuration/org.eclipse.osgi/216/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 engineTester.MainGameLoop
+
+Host: AMD A8-7410 APU with AMD Radeon R5 Graphics, 4 cores, 6G, Linux Mint 18.3 Sylvia
+Time: Sun Feb 17 21:22:10 2019 CST elapsed time: 94 seconds (0d 0h 1m 34s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fe540013800):  JavaThread "main" [_thread_in_native, id=4588, stack(0x00007fe54a144000,0x00007fe54a245000)]
+
+Stack: [0x00007fe54a144000,0x00007fe54a245000],  sp=0x00007fe54a243110,  free space=1020k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)

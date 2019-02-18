@@ -72,18 +72,18 @@ public class MasterRenderer {
 		
 		prepare();
         shader.start();
-        shader.loadSkyColor(RED, GREEN, BLUE);
+        shader.loadSkyColor(skyRed, skyGreen, skyBlue);
         shader.loadLights(lights);
         shader.loadViewMatrix(camera);
         renderer.render(entities);
         shader.stop();
         terrainShader.start();
-        terrainShader.loadSkyColor(RED, GREEN, BLUE);
+        terrainShader.loadSkyColor(skyRed, skyGreen, skyBlue);
         terrainShader.loadLights(lights);
         terrainShader.loadViewMatrix(camera);
         terrainRenderer.render(terrains);
         terrainShader.stop();
-        skyboxRenderer.render(camera, RED, GREEN, BLUE);
+        skyboxRenderer.render(camera, skyRed, skyGreen, skyBlue);
         terrains.clear();
         entities.clear();
 	}
