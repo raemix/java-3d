@@ -18,7 +18,8 @@ public class Box extends Entity {
 	private static float hoverDistance = 0.8f;
 	private float initialY;
 	private float dHoverY  = 0.01f;
-	private static TexturedModel box = new TexturedModel(OBJLoader.loadObjModel("box", loader),new ModelTexture(loader.loadTexture("box")));
+	private static TexturedModel box = 
+			new TexturedModel(OBJLoader.loadObjModel("box", loader),new ModelTexture(loader.loadTexture("box")));
 	
 	public Box(boolean b, Vector3f position, float scale) {
 		super(position, scale);

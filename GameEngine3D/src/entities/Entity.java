@@ -17,7 +17,7 @@ public class Entity {
 	protected float rotX, rotY, rotZ;
 	private float scale;
 	private int ID;
-	private boolean isPlayer;
+	private boolean isPlayer = false;
 	public boolean shouldRender = true;
 	
 	private int textureIndex = 0;

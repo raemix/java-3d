@@ -25,6 +25,9 @@ public class Player extends Entity{
 	private float currentStrafeSpeed = 0;
 	private boolean ableToCycleFirstPerson = true;
 	private boolean isFalling = false;
+	private boolean readyToFlush = false;
+	private boolean goAheadAndFlush = false;
+
 	
 	public Player(boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super(isPlayer, model, position, rotX, rotY, rotZ, scale);
@@ -105,7 +108,18 @@ public class Player extends Entity{
 			
 		}
 		if (!Keyboard.isKeyDown(Keyboard.KEY_F5)) {
-			ableToCycleFirstPerson = true;;
+			ableToCycleFirstPerson = true;
+
+		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_F3) && ableToCycleFirstPerson) {
+			readyToFlush = true;
+			
+		}
+		if (!Keyboard.isKeyDown(Keyboard.KEY_F3)) {
+			if (readyToFlush) {
+				goAheadAndFlush = true;
+			}
 
 		}
 	}
@@ -115,4 +129,23 @@ public class Player extends Entity{
 		
 		
 	}
+	
+
+	public boolean isGoAheadAndFlush() {
+		return goAheadAndFlush;
+	}
+
+	public void setGoAheadAndFlush(boolean goAheadAndFlush) {
+		this.goAheadAndFlush = goAheadAndFlush;
+	}
+
+	public boolean isReadyToFlush() {
+		return readyToFlush;
+	}
+
+	public void setReadyToFlush(boolean readyToFlush) {
+		this.readyToFlush = readyToFlush;
+	}
+	
+	
 }
