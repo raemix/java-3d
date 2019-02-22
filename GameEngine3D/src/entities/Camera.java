@@ -8,15 +8,15 @@ import org.lwjgl.util.vector.Vector3f;
 public class Camera {
 	
 	private static float MIN_DISTANCE_FROM_PLAYER = 20.0f;
-	private static float MAX_DISTANCE_FROM_PLAYER = 50.0f;
-	private float distanceFromPlayer = 50;
+	private static float MAX_DISTANCE_FROM_PLAYER = 75.0f;
+	private float distanceFromPlayer = 75;
 	private float angleAroundPlayer = 0;
 	private Player player;
-	private static boolean firstPerson = true;
+	private static boolean firstPerson = false;
 
 	private Vector3f position = new Vector3f(0,0,0);
 	
-	private float pitch = 0;
+	private float pitch = 20;
 	private float yaw = 0;
 	private float roll = 0;
 	private float speed = 1;

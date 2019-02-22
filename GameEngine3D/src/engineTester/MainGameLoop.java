@@ -25,6 +25,7 @@ import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
 import toolbox.MousePicker;
+import toolbox.Time;
 import entities.Box;
 import entities.Camera;
 import entities.Entity;
@@ -45,6 +46,7 @@ public class MainGameLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
         int mapSize = 1200;
+        final float MAX_LIGHT = 1.0f;
         
         //**************** TERRAIN TEXTURE STUFF **********************
         
@@ -151,7 +153,7 @@ public class MainGameLoop {
         List<LightSource> lightSources = new ArrayList<LightSource>();
         
         
-        lights.add(new Light(new Vector3f(0,1000,-7000), new Vector3f(0.1f,0.1f,0.1f)));
+        lights.add(new Light(new Vector3f(0,1000,-7000), new Vector3f(MAX_LIGHT,MAX_LIGHT,MAX_LIGHT)));
         
         // add lamps to map
         for (int i = 0;i<3;i++) {
@@ -213,7 +215,7 @@ public class MainGameLoop {
             }
             renderer.render(lights, camera);
             guiRenderer.render(guis);
-            DisplayManager.updateDisplay();
+            Time.updateTime();
         }
  
         guiRenderer.cleanUp();

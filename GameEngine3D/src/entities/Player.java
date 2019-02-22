@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector3f;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+import toolbox.Time;
 @SuppressWarnings("unused")
 
 public class Player extends Entity{
@@ -23,6 +24,7 @@ public class Player extends Entity{
 	private float strafeSpeed = RUN_SPEED * 0.75f;
 	private float currentStrafeSpeed = 0;
 	private boolean ableToCycleFirstPerson = true;
+	private boolean isFalling = false;
 	
 	public Player(boolean isPlayer, TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super(isPlayer, model, position, rotX, rotY, rotZ, scale);
@@ -36,9 +38,9 @@ public class Player extends Entity{
 	public void move(Terrain terrain) {
 		checkInput();
 		super.increaseRotation(0, 
-				currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
-		float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
-		float strafeDistance = (float) (currentStrafeSpeed * DisplayManager.getFrameTimeSeconds());
+				currentTurnSpeed * Time.getFrameTimeSeconds(), 0);
+		float distance = currentSpeed * Time.getFrameTimeSeconds();
+		float strafeDistance = (float) (currentStrafeSpeed * Time.getFrameTimeSeconds());
 
 		float dx = (float) (distance * Math.sin(Math.toRadians(super.getRotY())));
 		float dz = (float) (distance * Math.cos(Math.toRadians(super.getRotY())));
@@ -49,12 +51,13 @@ public class Player extends Entity{
 		super.increasePosition(dx, 0, dz);
 		super.increasePosition(sx, 0, -sz);
 		
-		upwardSpeed += GRAVITY * DisplayManager.getFrameTimeSeconds();
-		super.increasePosition(0, upwardSpeed * DisplayManager.getFrameTimeSeconds(), 0);
+		upwardSpeed += GRAVITY * Time.getFrameTimeSeconds();
+		super.increasePosition(0, upwardSpeed * Time.getFrameTimeSeconds(), 0);
 		
 		float terrainHeight = terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z);
 		if (super.getPosition().y < terrainHeight) {
 			super.getPosition().y = terrainHeight;
+			isFalling = false;
 		}
 	}
 	
@@ -89,7 +92,11 @@ public class Player extends Entity{
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			jump();
+			if (!isFalling) {
+				isFalling = true;
+				jump();
+
+			}
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_F5) && ableToCycleFirstPerson) {
