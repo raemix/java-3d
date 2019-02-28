@@ -33,6 +33,7 @@ import entities.LampPost;
 import entities.Light;
 import entities.LightSource;
 import entities.Player;
+import entities.Rabbit;
 import guis.GuiRenderer;
 import guis.GuiTexture;
  
@@ -140,6 +141,9 @@ public class MainGameLoop {
         TexturedModel box = new TexturedModel(OBJLoader.loadObjModel("box", loader),
         		new ModelTexture(loader.loadTexture("box")));
         
+        TexturedModel rabbit = new TexturedModel(OBJLoader.loadObjModel("rabbit", loader),
+        		new ModelTexture(loader.loadTexture("rabbit")));
+        
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader),
         		new ModelTexture(loader.loadTexture("grassTexture")));
         grass.getTexture().setHasTransparency(true);
@@ -154,7 +158,7 @@ public class MainGameLoop {
         
         entities.add(0,player);
         
-        for(int i=0;i<100;i++){
+        for(int i=0;i<50;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
@@ -162,14 +166,21 @@ public class MainGameLoop {
             		,0,i,0,8));
         }
         
-        for(int i=0;i<200;i++){
+        for(int i=0;i<100;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
             entities.add(new Box(false, new Vector3f(x, y + 10, z), 1));
         }
         
-        for(int i=0;i<100;i++){
+        for(int i=0;i<200;i++){
+        	float x = random.nextFloat() * mapSize;
+        	float z = random.nextFloat() * mapSize;
+        	float y = terrain.getHeightOfTerrain(x, z);
+            entities.add(new Rabbit(false, new Vector3f(x, y, z), 0.33f));
+        }
+        
+        for(int i=0;i<50;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
@@ -185,7 +196,7 @@ public class MainGameLoop {
             		y,z),0,i,0,1));
         }
         
-        for(int i=0;i<500;i++){
+        for(int i=0;i<100;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
