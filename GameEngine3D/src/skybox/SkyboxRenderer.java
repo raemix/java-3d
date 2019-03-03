@@ -154,7 +154,6 @@ public class SkyboxRenderer {
 		if (timeOfDay < 0) timeOfDay = 0;
 		float blendFactor = timeOfDay;
 
-		System.out.println(blendFactor);
 		r = r * blendFactor;
 		g = g * blendFactor;
 		b = b * blendFactor;

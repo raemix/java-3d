@@ -177,7 +177,7 @@ public class MainGameLoop {
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Rabbit(false, new Vector3f(x, y, z), 0.33f));
+            entities.add(new Rabbit(false, new Vector3f(x, y, z), 2.0f));
         }
         
         for(int i=0;i<50;i++){
@@ -188,7 +188,7 @@ public class MainGameLoop {
             		y,z),0,i,0,1));
         }
         
-        for(int i=0;i<500;i++){
+        for(int i=0;i<100;i++){
         	float x = random.nextFloat() * mapSize;
         	float z = random.nextFloat() * mapSize;
         	float y = terrain.getHeightOfTerrain(x, z);
